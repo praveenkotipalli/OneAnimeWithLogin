@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            /* background-color: rgba(200, 220, 255, 0.8);
+             */
+             background-image: url("https://i.pinimg.com/736x/8e/53/96/8e5396ad34a3eecbc7cc88c291747796.jpg");
+             background-size: cover;
+        }
+
+        .form-container {
+    background-color: rgba(255, 255, 255, 0.464); /* White with 60% opacity */
+    width: 350px;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+        h2 {
+            color: #4a148c;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #6a1b9a;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #6a1b9a;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #4a148c;
+        }
+
+        .form-footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #000;
+        }
+
+        .success-message {
+            background-color: #4a148c;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .error-message {
+            color: red;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="form-container">
+        <div th:if="${param.success}">
+            <div class="success-message">
+                <p>Registration Successful!</p>
+            </div>
+        </div>
+
+        <h2>Register</h2>
+        <form th:action="@{/register}" method="post" role="form" th:object="${user}">
+            <label for="fullname">Full Name</label>
+            <input th:field="*{fullname}" type="text" id="fullname" name="fullname" placeholder="Enter your Full Name" required>
+
+            <label for="username">Username</label>
+            <input th:field="*{username}" type="text" id="username" name="username" placeholder="Enter your Username" required>
+
+            <label for="password">Password</label>
+            <input th:field="*{password}" type="password" id="password" name="password" placeholder="Enter your Password" required>
+
+            <button type="submit">Register</button>
+        </form>
+        <div class="error-message" th:if="${Userexist}">Username is Taken</div>
+        <p class="form-footer">Already have an account? <a th:href="@{/login}">Login here</a>.</p>
+    </div>
+</body>
+
+</html>
